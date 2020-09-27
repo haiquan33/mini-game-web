@@ -1,0 +1,80 @@
+(function(win){var ccaoName="cca";var ccao=win[ccaoName];ccao.privacy=ccao.privacy||{};ccao.privacy.que=ccao.privacy.que||[];ccao.privacy.law="";ccao.privacy.gdpr={Consent:false,ConsentString:"",checkConsentFn:null}
+ccao.privacy.ccpa={Consent:false,ConsentString:"",checkConsentFn:null}
+ccao.privacy.none={Consent:true}
+ccao.privacy.log=[];var logger=function(message){ccao.privacy.log.push(message);}
+var firePixel=function(data){var privacyLawData=data.privacy[data.privacy.law];if(undefined===privacyLawData){return}
+if(!privacyLawData.Consent){return}
+var consentString="";if(data.privacy.law==="gdpr"){consentString=data.privacy.ConsentString}
+var ccUid="";try{if(window.localStorage){ccUid=window.localStorage.getItem("carbon_ccuid")||"";}}catch(err){logger("[ERROR] Error reading localStorage: "+err.message);}
+var ua="";if(navigator&&navigator.userAgent){ua=navigator.userAgent;}
+var url="https://sync.quantumdex.io/";if(url===""){if(window.top!==window){if(window.location.ancestorOrigins&&window.location.ancestorOrigins.length&&window.location.ancestorOrigins.length>0){url=window.location.ancestorOrigins[window.location.ancestorOrigins.length-1];}else{logger("[ERROR] Iframe origin missing")
+return}}else{url=window.location.href;}}
+var referer="undefined";if(referer===""){if(window.top===window){referer=document.referrer;}}
+var pixel=new Image();var scrapePixelUrl=new URL("https://dp.ccgateway.net/v1/appnendpt");scrapePixelUrl.searchParams.set("cs",encodeURIComponent(encodeURIComponent(consentString)));scrapePixelUrl.searchParams.set("cid",encodeURIComponent(encodeURIComponent(ccUid)));scrapePixelUrl.searchParams.set("pid","5275bf99d2");scrapePixelUrl.searchParams.set("u",encodeURIComponent(encodeURIComponent(url)));scrapePixelUrl.searchParams.set("r",encodeURIComponent(encodeURIComponent(referer)));scrapePixelUrl.searchParams.set("d",Math.floor(Date.now()/1000).toString());scrapePixelUrl.searchParams.set("ua",encodeURIComponent(encodeURIComponent(ua)));scrapePixelUrl.searchParams.set("apnid","$UID");pixel.src="https://ib.adnxs.com/getuid?"+scrapePixelUrl.href;};ccao.privacy.ready=false;var activatePrivacy=function(){if(ccao.privacy&&ccao.privacy.ready){logger("[WARNING] Attempted to ready privacy again");return}
+ccao.privacy.ready=true;for(var couple of ccao.privacy.que){if(couple.f&&Array.isArray(couple.i)){couple.f(...couple.i)
+couple.done=true;continue;}
+couple.done=false;logger("[ERROR] Bad couple: "+JSON.stringify(couple));}
+logger("[INFO] Closing privacy que, record below, ideally it should be empty: "+JSON.stringify(ccao.privacy.que));logger("[INFO] logging final object: "+JSON.stringify(ccao.privacy));ccao.privacy.que=[];}
+var carbonVendorID=493;var cmpCallbacks1={};var findFrame=function(frameName){var frame=win;var cmpFrame;while(frame){try{if(frame.frames[frameName]){cmpFrame=frame;break;}}catch(ignore){}
+if(frame===win.top){break;}
+frame=frame.parent;}
+return cmpFrame}
+var getGdprAPI=function(){if(win.self===win.top){logger("[INFO][GDPR-API] Not in iframe")
+if(win.__tcfapi){logger("[INFO][GDPR-API] API found! TCFV2 established")
+return{gdprAPI:win.__tcfapi,gdprVersion:2}}else if(win.__cmp){logger("[INFO][GDPR-API] API found! TCFV1.1 established")
+return{gdprAPI:win.__cmp,gdprVersion:1.1}}
+logger("[ERROR][GDPR-API] TCF API NOT FOUND")
+return{gdprAPI:null,gdprVersion:null}}
+logger("[INFO][GDPR-API] We are in iframe")
+var cmpFrame;var cmpCallbacks={};var callId=Math.random()+'';cmpFrame=findFrame("__tcfapiLocator")
+if(cmpFrame){logger("[INFO][GDPR-API][TCFv2] Iframe __tcfapiLocator found! gdpr v2, attatching iframe handlers")
+function postMessageHandler(event){var json={};try{json=typeof event.data==='string'?JSON.parse(event.data):event.data;}catch(ignore){}
+var payload=json.__tcfapiReturn;if(payload){if(typeof cmpCallbacks[payload.callId]==='function'){cmpCallbacks[payload.callId](payload.returnValue,payload.success);cmpCallbacks[payload.callId]=null;}}}
+win.addEventListener('message',postMessageHandler,false);return{gdprAPI:function(cmd,version,callback,arg){if(!cmpFrame){callback({msg:'CMP not found'},false);}else{var msg={__tcfapiCall:{command:cmd,parameter:arg,version:version,callId:callId}};cmpCallbacks[callId]=callback;cmpFrame.postMessage(msg,'*');}},gdprVersion:2};}else{logger("[INFO][GDPR-API][TCFv1.1] Iframe __tcfapiLocator not found checking for v1");cmpFrame=findFrame("__cmpLocator");if(!cmpFrame){logger("[ERROR][GDPR-API][TCFv1.1] Could not find v1.1 cmp either, giving up")
+return{gdprAPI:null,gdprVersion:null}}
+win.addEventListener("message",function(event){var json=typeof event.data==="string"?JSON.parse(event.data):event.data;if(json.__cmpReturn){var i=json.__cmpReturn;if(i&&i.callId&&cmpCallbacks1[i.callId]){if(typeof i.success=="undefined"&&i.returnValue){i.success=true;cmpCallbacks1[i.callId](i.returnValue,i.success);delete cmpCallbacks1[i.callId];}else{logger("[ERROR][GDPR-API][TCFv1.1] Issue with legacy return iframe data: "+JSON.stringify(i));}}else{logger("[ERROR][GDPR-API][TCFv1.1] We got hit without callback, probably a double call");}}},false);}
+return{gdprAPI:function(cmd,arg,callback){var callId=Math.random()+"";var msg={__cmpCall:{command:cmd,parameter:arg,callId:callId}};cmpCallbacks1[callId]=callback;cmpFrame.postMessage(msg,"*");},gdprVersion:1.1}}
+var doGdprCheckTCFV1=function(gdprAPI){var Call2Params=['getConsentData',null,function(result,success){logger("[INFO][TCFv1.1] Entering Second Callback")
+if(success){logger("[INFO][TCFv1.1] Second Callback has succeeded!");ccao.privacy.gdpr.ConsentString=result.consentData||"";return}
+logger("[ERROR][TCFv1.1] success=false on getting consent string");activatePrivacy();}];var Call1Params=['getVendorConsents',[carbonVendorID],function(result,success){logger("[INFO][TCFv1.1] Entering First Callback");if(!success){logger("[ERROR][TCFv1.1] Vendor consent success = false");activatePrivacy()
+return}
+logger("[INFO][TCFv1.1] First Callback has succeeded");var gdprApplies=result&&result.gdprApplies;if(!gdprApplies){logger("[INFO][TCFv1.1] GDPR does not apply");}else{var hasConsent=result&&result.vendorConsents&&result.vendorConsents[carbonVendorID];if(hasConsent){logger("[INFO [TCFv1.1] GDPR has vendor consent");ccao.privacy.gdpr.Consent=true;activatePrivacy();}else{logger("[INFO ][TCFv1.1] We officially and correctly do not have vendor consent");activatePrivacy();return}}
+gdprAPI(...Call2Params);}];gdprAPI(...Call1Params)}
+var doGdprCheckTCFV2=function(gdprAPI){logger("[INFO][TCFv2] Setting callback")
+var callback=function(tcData,success){logger("[INFO][TCFv2] Calling callback")
+if(success&&(tcData.eventStatus==='tcloaded'||tcData.eventStatus==='useractioncomplete')){logger("[INFO][TCFv2] We have determined the cmp is ready to give consent information")
+if(!tcData.gdprApplies){logger("[INFO][TCFv2] The cmp has determined gdpr does not apply")
+return}
+ccao.privacy.gdpr.ConsentString=tcData.tcString;logger("[INFO][TCFv2] Obtaining consent string: "+tcData.tcString)
+if(tcData.vendor&&tcData.vendor.consents){ccao.privacy.gdpr.Consent=tcData.vendor.consents[carbonVendorID]||false;}else{logger("[ERROR][TCFv2] Unable to obtain consent")}
+activatePrivacy()
+gdprAPI('removeEventListener',2,function(success){if(success){}else{logger("[ERROR] [TCFv2] unable to remove listener")}},tcData.listenerId);}else{}}
+gdprAPI('addEventListener',2,callback);}
+var doGdprCheck=function(){var{gdprAPI,gdprVersion}=getGdprAPI()
+if(!gdprAPI||!gdprVersion){logger("[ERROR] Due to lack of tcf cmp, we must assume no consent")
+activatePrivacy()
+return}
+if(gdprVersion===2){doGdprCheckTCFV2(gdprAPI);}
+if(gdprVersion===1.1){doGdprCheckTCFV1(gdprAPI);}}
+var doCCPACheck=function(){var getConsent=function(uspData,success){logger("[INFO][CCPA] Starting callback")
+if(success){logger("[INFO][CCPA] Callback has succeeded")
+ccao.privacy.ccpa.ConsentString=uspData.uspString;if(ccao.privacy.ccpa.ConsentString[2]==="-"||(ccao.privacy.ccpa.ConsentString[2].toLowerCase()==="n"&&ccao.privacy.ccpa.ConsentString[1].toLowerCase()==="y")){logger("[INFO][CCPA] getConsent has passed all string checks");ccao.privacy.ccpa.Consent=true;activatePrivacy();}else{logger("[WARNING][CCPA] getConsent did not pass all string checks");activatePrivacy();}
+return}
+logger("[ERROR][CCPA] getConsent function success was not true");activatePrivacy();};var version=1;if(win===win.top){logger("[INFO][CCPA] Not in iframe")
+win.__uspapi("getUSPData",version,getConsent);}else{logger("[INFO][CCPA] In iframe")
+var uspapiFrame;var frame=win;while(frame){try{if(frame.frames['__uspapiLocator']){uspapiFrame=frame;break;}}catch(ignore){}
+if(frame===win.top){break;}
+frame=frame.parent;}
+if(uspapiFrame){logger("[INFO][CCPA] Locator frame found")
+win.addEventListener('message',function(event){logger("[INFO][CCPA] Inside post message listener, though this message will fire on other events as well")
+var json={};try{json=typeof event.data==='string'?JSON.parse(event.data):event.data;}catch(ignore){}
+if(json.__uspapiReturn){logger("[INFO][CCPA] Inside post message listener AND usapireturn exists")
+try{if(json.__uspapiReturn.callId===callId){logger("[INFO][CCPA] Received event calling callback, assuming correct event because has our id and no way to check")
+getConsent(json.__uspapiReturn.returnValue,json.__uspapiReturn.success);return;}}catch(err){logger("[ERROR][CCPA] "+err.message);}}},false);var callId=Math.random()+'';logger("[INFO][CCPA] Posting to locator frame")
+uspapiFrame.postMessage({__uspapiCall:{command:"getUSPData",version:version,callId:callId}},"*");return;}
+logger("[ERROR][CCPA] Unable to find locator frame from iframe")}}
+var checkConsentForGeo=function(geoString){if(ccao.privacy&&ccao.privacy.ready){logger("[WARNING] Attempted to find geo after privacy has been ready");return;}
+switch(geoString.toLowerCase()){case "eu":case "uk":logger("[INFO] Geo found check suggests we are in GDPR territory")
+ccao.privacy.law="gdpr"
+ccao.privacy.que.push({f:firePixel,i:[ccao],done:null});doGdprCheck();break;case "ca":logger("[INFO] Geo found check suggests we are in CCPA territory");ccao.privacy.law="ccpa";ccao.privacy.que.push({f:firePixel,i:[ccao],done:null});doCCPACheck();break;case "optout":logger("[INFO] Opt Out cookie found, skipping Geo check");ccao.privacy.law="optout";activatePrivacy();break;case "other":logger("[INFO] Geo Found check suggests we are not in a privacy law applicable territory");ccao.privacy.law="none";ccao.privacy.none.Consent=true;ccao.privacy.que.push({f:firePixel,i:[ccao],done:null});activatePrivacy();break;case "unknown":default:logger("[INFO] Geo Found check suggests we are unable to determine applicable privacy geo");ccao.privacy.law="unknown";activatePrivacy();break;}}
+try{var xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState===4&&xhr.status===200){try{var response=xhr.responseText.toString();checkConsentForGeo(response);}catch(e){logger("[ERROR] Issue with Geo call found: "+JSON.stringify(e));logger("[ERROR] Response text of bad Geo call was: "+JSON.stringify(xhr.responseText))}}};xhr.open("GET","https://carbon-cdn.ccgateway.net/privacy/location",true);xhr.send();}catch(ignore){}})(window)

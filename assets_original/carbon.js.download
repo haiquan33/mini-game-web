@@ -1,0 +1,25 @@
+(function(twin){
+	var SRC = "https://dp.ccgateway.net/v1/da/5275bf99d2?consentstring={CONSENTSTRING}&url={URL}&referer={REFERER}",
+		getSec = function(f){
+			var r; try{r = f()} catch(e){};
+			return r;
+		},
+		getTopHref = function() {return twin.location.href},
+		getTopReferer = function() {return twin.document.referer},
+		enc = function(u){return encodeURIComponent(u)},
+		append = function() {
+			ld.head.appendChild(ld.createElement("script")).src = SRC
+				.replace("{URL}", enc(url))
+				.replace("{REFERER}", enc(referer));
+		},
+		lw = window,
+		ld = lw.document,
+		lr = ld.referrer,
+		thref = getSec(getTopHref),
+		tdref = getSec(getTopReferer),
+		lhref = lw.location.href,
+		url = (lhref != thref && "about:blank" != lhref) ? lr : thref,
+		referer =  tdref || (url!= lr) ? lr : tdref;
+	if(url && !url.match(/acdn\.adnxs\.com/)) append();
+	
+})(window.top)

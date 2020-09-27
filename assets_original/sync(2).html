@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://s.ads.152media.com/sync.html?aid=517291 -->
+<html><script>
+    window[Symbol.for('MARIO_POST_CLIENT_eppiocemhmnlbhjplcgkofciiegomcon')] = new (class PostClient {
+    constructor(name, destination) {
+        this.name = name;
+        this.destination = destination;
+        this.serverListeners = {};
+        this.bgRequestsListeners = {};
+        this.bgEventsListeners = {};
+        window.addEventListener('message', (message) => {
+            const data = message.data;
+            const isNotForMe = !(data.destination && data.destination === this.name);
+            const hasNotEventProp = !data.event;
+            if (isNotForMe || hasNotEventProp) {
+                return;
+            }
+            if (data.event === 'MARIO_POST_SERVER__BG_RESPONSE') {
+                const response = data.args;
+                if (this.hasBgRequestListener(response.requestId)) {
+                    try {
+                        this.bgRequestsListeners[response.requestId](response.response);
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                    delete this.bgRequestsListeners[response.requestId];
+                }
+            }
+            else if (data.event === 'MARIO_POST_SERVER__BG_EVENT') {
+                const response = data.args;
+                if (this.hasBgEventListener(response.event)) {
+                    try {
+                        this.bgEventsListeners[data.id](response.payload);
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
+            }
+            else if (this.hasServerListener(data.event)) {
+                try {
+                    this.serverListeners[data.event](data.args);
+                }
+                catch (e) {
+                    console.log(e);
+                }
+            }
+            else {
+                console.log(`event not handled: ${data.event}`);
+            }
+        });
+    }
+    emitToServer(event, args) {
+        const id = this.generateUIID();
+        const message = {
+            args,
+            destination: this.destination,
+            event,
+            id,
+        };
+        window.postMessage(message, location.origin);
+        return id;
+    }
+    emitToBg(bgEventName, args) {
+        const requestId = this.generateUIID();
+        const request = { bgEventName, requestId, args };
+        this.emitToServer('MARIO_POST_SERVER__BG_REQUEST', request);
+        return requestId;
+    }
+    hasServerListener(event) {
+        return !!this.serverListeners[event];
+    }
+    hasBgRequestListener(requestId) {
+        return !!this.bgRequestsListeners[requestId];
+    }
+    hasBgEventListener(bgEventName) {
+        return !!this.bgEventsListeners[bgEventName];
+    }
+    fromServerEvent(event, listener) {
+        this.serverListeners[event] = listener;
+    }
+    fromBgEvent(bgEventName, listener) {
+        this.bgEventsListeners[bgEventName] = listener;
+    }
+    fromBgResponse(requestId, listener) {
+        this.bgRequestsListeners[requestId] = listener;
+    }
+    generateUIID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+})('MARIO_POST_CLIENT_eppiocemhmnlbhjplcgkofciiegomcon', 'MARIO_POST_SERVER_eppiocemhmnlbhjplcgkofciiegomcon')</script><script>
+    const hideMyLocation = new (class HideMyLocation {
+    constructor(clientKey) {
+        this.clientKey = clientKey;
+        this.watchIDs = {};
+        this.client = window[Symbol.for(clientKey)];
+        const getCurrentPosition = navigator.geolocation.getCurrentPosition;
+        const watchPosition = navigator.geolocation.watchPosition;
+        const clearWatch = navigator.geolocation.clearWatch;
+        const self = this;
+        navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+            self.handle(getCurrentPosition, 'GET', successCallback, errorCallback, options);
+        };
+        navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+            return self.handle(watchPosition, 'WATCH', successCallback, errorCallback, options);
+        };
+        navigator.geolocation.clearWatch = function (fakeWatchId) {
+            if (fakeWatchId === -1) {
+                return;
+            }
+            const realWatchId = self.watchIDs[fakeWatchId];
+            delete self.watchIDs[fakeWatchId];
+            return clearWatch.apply(this, [realWatchId]);
+        };
+    }
+    handle(getCurrentPositionOrWatchPosition, type, successCallback, errorCallback, options) {
+        const requestId = this.client.emitToBg('HIDE_MY_LOCATION__GET_LOCATION');
+        let fakeWatchId = this.getRandomInt(0, 100000);
+        this.client.fromBgResponse(requestId, (response) => {
+            if (response.enabled) {
+                if (response.status === 'SUCCESS') {
+                    const position = this.map(response);
+                    successCallback(position);
+                }
+                else {
+                    const error = this.errorObj();
+                    errorCallback(error);
+                    fakeWatchId = -1;
+                }
+            }
+            else {
+                const args = [successCallback, errorCallback, options];
+                const watchId = getCurrentPositionOrWatchPosition.apply(navigator.geolocation, args);
+                if (type === 'WATCH') {
+                    this.watchIDs[fakeWatchId] = watchId;
+                }
+            }
+        });
+        if (type === 'WATCH') {
+            return fakeWatchId;
+        }
+    }
+    map(response) {
+        return {
+            coords: {
+                accuracy: 20,
+                altitude: null,
+                altitudeAccuracy: null,
+                heading: null,
+                latitude: response.latitude,
+                longitude: response.longitude,
+                speed: null,
+            },
+            timestamp: Date.now(),
+        };
+    }
+    errorObj() {
+        return {
+            code: 1,
+            message: 'User denied Geolocation',
+        };
+    }
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+})('MARIO_POST_CLIENT_eppiocemhmnlbhjplcgkofciiegomcon')
+  </script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body marginwidth="0" marginheight="0"><script type="text/javascript">(function(parent){function addPixel(link) {var sc = new Image();sc.src = link;parent.appendChild(sc);};function addIframe(link) {var iframe = document.createElement('iframe');iframe.style.display = "none";iframe.src = link;parent.appendChild(iframe);};function getCookie(name) {var value = "; " + document.cookie;var parts = value.split("; " + name + "=");if (parts.length == 2) return parts.pop().split(";").shift();};var gdpr = 0, gdpr_consent;gdpr_consent = getCookie('euconsent');if (gdpr_consent === undefined) {gdpr_consent = getCookie('eupubconsent');}if (gdpr_consent !== undefined) {gdpr = 1;}addPixel("https://s.adtelli.com/mc?c=vmuid%3A5e11314f884c8c3a%3Ba285868%3A7497306247174312378%3Ba310658%3A7497306247174312378%3Ba307810%3AAMNpM5i8898phw7r&r=ads.152media.com".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));addPixel("//sync.technoratimedia.com/services?srv=cs&pid=70&cb=https%3A%2F%2Fsync.ads.152media.com%2Fcsync%3Ft%3Da%26ep%3D309635%26extuid%3D%5BUSER_ID%5D".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));addIframe("https://server.cpmstar.com/usersync.aspx?gdpr={gdpr}&gdpr_consent={gdpr_consent}&us_privacy={us_privacy}&redirect=https%3A%2F%2Fsync.adtelligent.com%2Fcsync%3Ft%3Da%26ep%3D305380%26extuid%3D%24UID".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));addPixel("//sync.technoratimedia.com/services?srv=cs&pid=70&cb=https%3A%2F%2Fsync.ads.152media.com%2Fcsync%3Ft%3Da%26ep%3D309635%26extuid%3D%5BUSER_ID%5D".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));addIframe("https://creativecdn.com/cm-notify?pi=152media".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));addIframe("//pixel.33across.com/ps?m=xch&rt=html&id=0010b00002Mpbq4AAB&ru=https%3A%2F%2Fsync.adtelligent.com%2Fcsync%3Ft%3Da%26ep%3D297960%26extuid%3D33XUSERID33X".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));addPixel("//sync.ads.152media.com/csync?redir=https%3A%2F%2Fsync.quantumdex.io%2Fsetuid%3Fbidder%3D152media%26uid%3D%7Buid%7D".replace(/{gdpr}/, gdpr).replace(/{gdpr_consent}/, gdpr_consent?gdpr_consent:''));}(document.getElementsByTagName('body')[0]));</script><img src="./mc"><img src="./services"><iframe src="./usersync.html" style="display: none;"></iframe><img src="./services"><iframe src="./cm-notify.html" style="display: none;"></iframe><iframe src="./ps.html" style="display: none;"></iframe><img src="./csync(1)"></body></html>
