@@ -187,3 +187,16 @@
   margin-bottom: 6px;
   min-width: 610px;
 }
+
+.game-detail__container {
+  width: 660px;
+  height: 266px;
+  background-color: #00acee;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.game-detail__img {
+  width: 200px;
+  height: 200px;
+}
