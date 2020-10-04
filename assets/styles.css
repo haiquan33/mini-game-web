@@ -157,3 +157,33 @@
   opacity: 1;
   visibility: visible;
 }
+
+.ads-box-1 {
+  background-color: #00acee;
+  width: 768px;
+  height: 100px;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+}
+
+.ads-box-2 {
+  background-color: #00acee;
+  width: 180px;
+  height: 647px;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+}
+
+.game-screen {
+  height: 568px;
+  text-align: center;
+  background: #222 url(./loader.gif) center 45% no-repeat;
+  position: relative;
+  z-index: 1200 !important;
+  overflow: hidden;
+  min-height: 550px;
+  margin-bottom: 6px;
+  min-width: 610px;
+}
