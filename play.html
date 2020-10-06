@@ -105,29 +105,63 @@
             </div>
 
 
-            <div class="row justify-content-center mt-2">
+            <!-- GAME DESCRIPTION -->
+            <div class="row justify-content-center mt-2 d-none d-lg-flex">
                 <div class="game-detail__container">
                     <div class="game-detail__wrapper row px-3">
-                        <img class="game-detail__img mt-2" src="./assets_original/512x384(10).jpg"/>
-                        <div class="game-detail__desc d-flex">
+                        <img class="game-detail__img mt-2" src="./assets_original/512x384(10).jpg" />
+                        <div class="game-detail__desc d-flex flex-column ml-2 mr-5">
                             <span class="game-detail__desc-name">
                                 Game name
                             </span>
 
-                            <span class="game-detail__desc-label">
-                                Add This Game To Your Site:    
+                            <span class="game-detail__desc-label mt-3">
+                                Add This Game To Your Site:
                             </span>
+                            <textarea class="game-detail__desc-textarea">
+                            </textarea>
+
+                            <span class="game-detail__desc-label mt-3">
+                                Link To The Game:
+                            </span>
+                            <textarea class="game-detail__desc-textarea">
+                            </textarea>
 
                         </div>
-                        <div class="game-detail__ads"></div>
+                        <div class="game-detail__ads">advertising</div>
                     </div>
 
                 </div>
             </div>
-        </div>
 
-        <div class="back-top-btn" id="BackTop">
-        </div>
+            <!-- RECOMMEND GAME LIST -->
+            <div class="row justify-content-center mt-2 d-none d-lg-flex">
+                <div class="recommend-list__container">
+                    <div class="recommend-list__title">
+                        Similar Games
+                    </div>
+
+                    <!-- GAME LIST -->
+                    <div class="mt-3 game-list">
+                        <div class="game-item-wrapper">
+                            <div class="game-item mb-3">
+                                <a href="https://google.com" target="_blank" class="game-item__link">
+                                    <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
+                                </a>
+                                <div class="game-item__desc">
+                                    <p class="game-item__name">Spiders</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ############################### -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="back-top-btn" id="BackTop">
+            </div>
 
     </main>
 

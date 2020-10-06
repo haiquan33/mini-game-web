@@ -189,7 +189,7 @@
 }
 
 .game-detail__container {
-  width: 660px;
+  width: 60%;
   height: 266px;
   background-color: #00acee;
   padding: 10px;
@@ -199,4 +199,55 @@
 .game-detail__img {
   width: 200px;
   height: 200px;
+}
+
+.game-detail__desc {
+  flex: 1;
+}
+
+.game-detail__desc-name {
+  font-size: 21px;
+  font-weight: 400;
+  font-family: Oswald, sans-serif;
+}
+
+.game-detail__desc-label {
+  font-size: 13px;
+  font-weight: 400;
+  font-family: Oswald, sans-serif;
+}
+
+.game-detail__desc-textarea {
+  width: 100%;
+}
+
+.game-detail__ads {
+  width: 280px;
+  height: 215px;
+  background-color: #c36de6;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.recommend-list__container {
+  width: 60%;
+  height: 266px;
+  background-color: #00acee;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+.recommend-list__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003d71;
+  border-left: solid 4px #ffda19;
+  text-indent: 9px;
+  text-transform: capitalize;
+  font-family: Oswald, sans-serif;
+}
+
+.recommend-list__container > .game-list > .game-item-wrapper {
+  width: 15%;
 }
