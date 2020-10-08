@@ -1,253 +1,280 @@
 .nav-custom {
-  background-color: #fc0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: #fc0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    justify-content: center;
 }
 
 .navbar-brand {
-  background: url(./gm-logo.png);
-  width: 157px;
-  height: 67px;
+    background: url(./gm-logo.png);
+    width: 157px;
+    height: 67px;
+}
+
+.navbar-collapse {
+    flex-basis: auto;
+    flex-grow: unset;
+}
+
+@media (min-width: 768px) {
+    .navbar-collapse {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-collapse {
+        width: fit-content;
+    }
 }
 
 .navbar-brand:hover {
-  background: url(./gm-logo-hover.png);
-  width: 157px;
-  height: 67px;
+    background: url(./gm-logo-hover.png);
+    width: 157px;
+    height: 67px;
 }
 
 .footer {
-  background-color: #fc0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: #fc0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.foot-inner > .link-b > span,
-.foot-inner > .link-b > a {
-  color: black;
-  font-size: 12px;
+.foot-inner>.link-b>span,
+.foot-inner>.link-b>a {
+    color: black;
+    font-size: 12px;
 }
 
 .navbar {
-  padding: 0rem 1rem;
+    padding: 0rem 1rem;
 }
 
 .nav-item {
-  padding: 5px 10px 4px;
-  color: #035193;
-  font-family: Oswald, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  text-transform: uppercase;
-  display: block;
-  margin: 0 20px;
+    padding: 5px 10px 4px;
+    color: #035193;
+    font-family: Oswald, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 20px;
 }
 
 .nav-item:hover {
-  background-color: red;
-  color: white;
+    background-color: red;
+    color: white;
 }
 
 .nav-ico {
-  display: block;
-  height: 40px;
-  margin: 0 auto;
-  background: url(./sprite.png?v=3) no-repeat;
+    display: block;
+    height: 40px;
+    margin: 0 auto;
+    background: url(./sprite.png?v=3) no-repeat;
 }
 
 .nav-ico.tags {
-  width: 43px;
-  background-position: -114px 0;
+    width: 43px;
+    background-position: -114px 0;
 }
 
 .nav-ico.new {
-  width: 59px;
-  background-position: 0 0;
+    width: 59px;
+    background-position: 0 0;
 }
 
 .nav-ico.best {
-  width: 51px;
-  background-position: -60px 0;
+    width: 51px;
+    background-position: -60px 0;
 }
 
 .nav-ico.featured {
-  width: 43px;
-  background-position: -159px 0;
+    width: 43px;
+    background-position: -159px 0;
 }
 
 .nav-ico.played {
-  width: 37px;
-  background-position: -203px 0;
+    width: 37px;
+    background-position: -203px 0;
 }
 
 .nav-ico.search {
-  width: 41px;
-  background-position: -244px 0;
+    width: 41px;
+    background-position: -244px 0;
 }
 
 .main-container {
-  background-color: #0073dd;
-  height: 100%;
+    background-color: #0073dd;
+    height: 100%;
+    align-items: center;
 }
 
 .game-item-wrapper {
-  max-width: 200px;
+    max-width: 200px;
 }
 
 .game-item {
-  width: 100%;
-  height: 130px;
-  border: 2px solid #fff;
-  border-radius: 10px;
-  position: relative;
+    width: 100%;
+    height: 130px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    position: relative;
 }
 
 .game-item:hover {
-  border: 2px solid #fc0;
+    border: 2px solid #fc0;
 }
 
-.game-item:hover > .game-item__desc {
-  opacity: 1;
+.game-item:hover>.game-item__desc {
+    opacity: 1;
 }
 
 .game-item__desc {
-  background-color: #fc0;
-  text-align: center;
-  border-radius: 0px 0px 5px 5px;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 30px;
-  opacity: 0;
+    background-color: #fc0;
+    text-align: center;
+    border-radius: 0px 0px 5px 5px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 30px;
+    opacity: 0;
 }
 
 .game-item__name {
-  color: black;
-  font-size: 13px;
-  font-weight: 700;
-  margin-top: 5px;
+    color: black;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 5px;
 }
 
 .game-item__img {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 .back-top-btn {
-  width: 123px;
-  height: 159px;
-  background: url(./backtotop.png);
-  position: fixed;
-  bottom: 40px;
-  right: 10px;
-  cursor: pointer;
-
-  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1000;
+    width: 123px;
+    height: 159px;
+    background: url(./backtotop.png);
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
 }
 
 .back-top-btn:hover {
-  background: url(./backtotoph.png);
+    background: url(./backtotoph.png);
 }
 
 .back-top-btn.show {
-  opacity: 1;
-  visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
 .ads-box-1 {
-  background-color: #00acee;
-  width: 768px;
-  height: 100px;
-  padding: 10px;
-  color: white;
-  border-radius: 5px;
+    background-color: #00acee;
+    width: 768px;
+    height: 100px;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
 }
 
 .ads-box-2 {
-  background-color: #00acee;
-  width: 180px;
-  height: 647px;
-  padding: 10px;
-  color: white;
-  border-radius: 5px;
+    background-color: #00acee;
+    width: 180px;
+    height: 647px;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
 }
 
 .game-screen {
-  height: 568px;
-  text-align: center;
-  background: #222 url(./loader.gif) center 45% no-repeat;
-  position: relative;
-  z-index: 1200 !important;
-  overflow: hidden;
-  min-height: 550px;
-  margin-bottom: 6px;
-  min-width: 610px;
+    height: 568px;
+    text-align: center;
+    background: #222 url(./loader.gif) center 45% no-repeat;
+    position: relative;
+    z-index: 1200 !important;
+    overflow: hidden;
+    min-height: 550px;
+    margin-bottom: 6px;
+    min-width: 610px;
 }
 
 .game-detail__container {
-  width: 60%;
-  height: 266px;
-  background-color: #00acee;
-  padding: 10px;
-  border-radius: 5px;
+    width: 100%;
+    height: 266px;
+    background-color: #00acee;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .game-detail__img {
-  width: 200px;
-  height: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 .game-detail__desc {
-  flex: 1;
+    flex: 1;
 }
 
 .game-detail__desc-name {
-  font-size: 21px;
-  font-weight: 400;
-  font-family: Oswald, sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    font-family: Oswald, sans-serif;
 }
 
 .game-detail__desc-label {
-  font-size: 13px;
-  font-weight: 400;
-  font-family: Oswald, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: Oswald, sans-serif;
 }
 
 .game-detail__desc-textarea {
-  width: 100%;
+    width: 100%;
 }
 
 .game-detail__ads {
-  width: 280px;
-  height: 215px;
-  background-color: #c36de6;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
+    width: 280px;
+    height: 215px;
+    background-color: #c36de6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .recommend-list__container {
-  width: 60%;
-  height: 266px;
-  background-color: #00acee;
-  padding: 15px 20px;
-  border-radius: 5px;
+    width: 60%;
+    height: 266px;
+    background-color: #00acee;
+    padding: 15px 20px;
+    border-radius: 5px;
 }
 
 .recommend-list__title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #003d71;
-  border-left: solid 4px #ffda19;
-  text-indent: 9px;
-  text-transform: capitalize;
-  font-family: Oswald, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #003d71;
+    border-left: solid 4px #ffda19;
+    text-indent: 9px;
+    text-transform: capitalize;
+    font-family: Oswald, sans-serif;
 }
 
-.recommend-list__container > .game-list > .game-item-wrapper {
-  width: 15%;
+.recommend-list__container>.game-list>.game-item-wrapper {
+    width: 15%;
+    min-width: 120px;
+}
+
+.game-list-vertical {
+    width: 10%;
+}
+
+.game-list-vertical .game-item {
+    height: 100px;
 }

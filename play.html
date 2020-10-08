@@ -32,7 +32,7 @@
 
     <!-- HEADER -->
     <nav class="navbar navbar-expand-lg navbar-light nav-custom">
-        <a class="navbar-brand" href="#"> </a>
+        <a class="navbar-brand" href="./index.html"> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -83,7 +83,7 @@
 
     <!-- BODY -->
     <main class="flex-grow-1" role="main">
-        <div class="container-fluid main-container py-3">
+        <div class="container-fluid main-container py-3 justify-content-center d-flex flex-column"">
 
             <!-- GAME WRAPPER -->
             <div class="row justify-content-center">
@@ -92,21 +92,56 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center mt-3">
-                <div class="ads-box-2 mr-2 d-none d-lg-block">
+            <div class="d-flex w-100 justify-content-center mt-3">
+                <div class="ads-box-2 mr-1 d-none d-md-block">
                     advertising
                 </div>
+
+                <!-- GAME LIST -->
+                <div class="mr-1 d-none d-xl-flex game-list-vertical">
+                    <div class="game-item-wrapper">
+                        <div class="game-item mb-3">
+                            <a href="https://google.com" target="_blank" class="game-item__link">
+                                <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
+                            </a>
+                            <div class="game-item__desc">
+                                <p class="game-item__name">Spiders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ############################### -->
+
+                <!-- GAME SCREEN -->
                 <div class="game-screen">
 
                 </div>
-                <div class="ads-box-2 ml-2 d-none d-lg-block">
+
+                <!-- ############################### -->
+
+                <!-- GAME LIST -->
+                <div class="ml-1 d-none d-xl-flex game-list-vertical">
+                    <div class="game-item-wrapper">
+                        <div class="game-item mb-3">
+                            <a href="https://google.com" target="_blank" class="game-item__link">
+                                <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
+                            </a>
+                            <div class="game-item__desc">
+                                <p class="game-item__name">Spiders</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ############################### -->
+
+                <div class="ads-box-2 ml-1 d-none d-md-block">
                     advertising
                 </div>
             </div>
 
 
             <!-- GAME DESCRIPTION -->
-            <div class="row justify-content-center mt-2 d-none d-lg-flex">
+            <div class="row mt-2 d-none d-md-flex col-md-10 col-lg-8">
                 <div class="game-detail__container">
                     <div class="game-detail__wrapper row px-3">
                         <img class="game-detail__img mt-2" src="./assets_original/512x384(10).jpg" />
@@ -128,15 +163,15 @@
                             </textarea>
 
                         </div>
-                        <div class="game-detail__ads">advertising</div>
+                        <div class="game-detail__ads d-none d-lg-flex">advertising</div>
                     </div>
 
                 </div>
             </div>
 
             <!-- RECOMMEND GAME LIST -->
-            <div class="row justify-content-center mt-2 d-none d-lg-flex">
-                <div class="recommend-list__container">
+            <div class="row justify-content-center mt-2 d-none d-md-flex col-md-10 col-lg-8">
+                <div class="recommend-list__container col-12">
                     <div class="recommend-list__title">
                         Similar Games
                     </div>
@@ -153,9 +188,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- ############################### -->
-
                     </div>
+                    <!-- ############################### -->
                 </div>
 
             </div>
