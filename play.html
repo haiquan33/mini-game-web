@@ -40,42 +40,77 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+
                 <li class="nav-item active text-center">
                     <a class="nav-link" href="#">
                         <a class="nav-ico tags"></a>
                         <span>TAGS</span>
                     </a>
+                    <div class="tooltip-menu">
+                        <span class="arrow"></span>
+                        <div class="tip-txt">TAGS</div>
+                    </div>
                 </li>
+
                 <li class="nav-item active text-center">
                     <a class="nav-link" href="#">
                         <a class="nav-ico new"></a>
                         <span>NEW</span>
                     </a>
+                    <div class="tooltip-menu">
+                        <span class="arrow"></span>
+                        <div class="tip-txt">NEW</div>
+                    </div>
                 </li>
+
                 <li class="nav-item active text-center">
                     <a class="nav-link" href="#">
                         <a class="nav-ico best"></a>
                         <span>BEST</span>
                     </a>
+
+                    <div class="tooltip-menu">
+                        <span class="arrow"></span>
+                        <div class="tip-txt">BEST</div>
+                    </div>
                 </li>
+
                 <li class="nav-item active text-center">
                     <a class="nav-link" href="#">
                         <a class="nav-ico featured"></a>
                         <span>FEATURED</span>
                     </a>
+
+                    <div class="tooltip-menu">
+                        <span class="arrow"></span>
+                        <div class="tip-txt">FEATURED</div>
+                    </div>
                 </li>
+
                 <li class="nav-item active text-center">
                     <a class="nav-link" href="#">
                         <a class="nav-ico played"></a>
                         <span>PLAYED</span>
                     </a>
+
+                    <div class="tooltip-menu">
+                        <span class="arrow"></span>
+                        <div class="tip-txt">PLAYED</div>
+                    </div>
+                </li>
+
                 <li class="nav-item active text-center">
                     <a class="nav-link" href="#">
                         <a class="nav-ico search"></a>
                         <span>SEARCH</span>
                     </a>
+
+                    <div class="tooltip-menu">
+                        <span class="arrow"></span>
+                        <div class="tip-txt">SEARCH</div>
+                    </div>
                 </li>
-                </li>
+
             </ul>
         </div>
     </nav>
@@ -86,20 +121,101 @@
         <div class="container-fluid main-container py-3 justify-content-center d-flex flex-column"">
 
             <!-- GAME WRAPPER -->
-            <div class="row justify-content-center">
-                <div class="ads-box-1">
-                    advertising
-                </div>
+            <div class=" row justify-content-center w-100">
+            <div class="ads-box-1 col-10 col-lg-7">
+                advertising
+            </div>
+        </div>
+
+        <div class="d-flex w-100 justify-content-center mt-3">
+            <div class="ads-box-2 mr-1 d-none d-lg-block">
+                advertising
             </div>
 
-            <div class="d-flex w-100 justify-content-center mt-3">
-                <div class="ads-box-2 mr-1 d-none d-md-block">
-                    advertising
+            <!-- GAME LIST VERICAL 1-->
+            <div class="mr-1 d-none d-xl-flex flex-column game-list-vertical" id="list_left">
+                <div class="game-item-wrapper d-none">
+                    <div class="game-item mb-3">
+                        <a href="https://google.com" target="_blank" class="game-item__link">
+                            <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
+                        </a>
+                        <div class="game-item__desc">
+                            <p class="game-item__name">Spiders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ############################### -->
+
+            <!-- GAME SCREEN -->
+            <div class="game-screen">
+
+            </div>
+
+            <!-- ############################### -->
+
+            <!-- GAME LIST VERICAL 2 -->
+            <div class="ml-1 d-none d-xl-flex flex-column game-list-vertical" id="list_right">
+                <div class="game-item-wrapper d-none">
+                    <div class="game-item mb-3">
+                        <a href="https://google.com" target="_blank" class="game-item__link">
+                            <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
+                        </a>
+                        <div class="game-item__desc">
+                            <p class="game-item__name">Spiders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ############################### -->
+
+            <div class="ads-box-2 ml-1 d-none d-lg-block">
+                advertising
+            </div>
+        </div>
+
+
+        <!-- GAME DESCRIPTION -->
+        <div class="row mt-2 d-none d-md-flex col-md-10 col-lg-8">
+            <div class="game-detail__container">
+                <div class="game-detail__wrapper row px-3">
+                    <img class="game-detail__img mt-2" src="./assets_original/512x384(10).jpg" />
+                    <div class="game-detail__desc d-flex flex-column ml-2 mr-5">
+                        <span class="game-detail__desc-name">
+                            Game name
+                        </span>
+
+                        <span class="game-detail__desc-label mt-3">
+                            Add This Game To Your Site:
+                        </span>
+                        <textarea class="game-detail__desc-textarea">
+                            </textarea>
+
+                        <span class="game-detail__desc-label mt-3">
+                            Link To The Game:
+                        </span>
+                        <textarea class="game-detail__desc-textarea">
+                            </textarea>
+
+                    </div>
+                    <div class="game-detail__ads d-none d-lg-flex">advertising</div>
+                </div>
+                <span class="game-detail__desc-text mt-3">
+                    Add This Game To Your Site:
+                </span>
+            </div>
+        </div>
+
+        <!-- RECOMMEND GAME LIST BOTTOM-->
+        <div class="row justify-content-center mt-2 col-md-10 col-lg-8">
+            <div class="recommend-list__container col-12">
+                <div class="recommend-list__title">
+                    Similar Games
                 </div>
 
                 <!-- GAME LIST -->
-                <div class="mr-1 d-none d-xl-flex game-list-vertical">
-                    <div class="game-item-wrapper">
+                <div class="mt-3 game-list justify-content-center row" id="similar-list">
+                    <div class="game-item-wrapper d-none mx-2">
                         <div class="game-item mb-3">
                             <a href="https://google.com" target="_blank" class="game-item__link">
                                 <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
@@ -111,91 +227,12 @@
                     </div>
                 </div>
                 <!-- ############################### -->
-
-                <!-- GAME SCREEN -->
-                <div class="game-screen">
-
-                </div>
-
-                <!-- ############################### -->
-
-                <!-- GAME LIST -->
-                <div class="ml-1 d-none d-xl-flex game-list-vertical">
-                    <div class="game-item-wrapper">
-                        <div class="game-item mb-3">
-                            <a href="https://google.com" target="_blank" class="game-item__link">
-                                <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
-                            </a>
-                            <div class="game-item__desc">
-                                <p class="game-item__name">Spiders</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ############################### -->
-
-                <div class="ads-box-2 ml-1 d-none d-md-block">
-                    advertising
-                </div>
             </div>
 
+        </div>
 
-            <!-- GAME DESCRIPTION -->
-            <div class="row mt-2 d-none d-md-flex col-md-10 col-lg-8">
-                <div class="game-detail__container">
-                    <div class="game-detail__wrapper row px-3">
-                        <img class="game-detail__img mt-2" src="./assets_original/512x384(10).jpg" />
-                        <div class="game-detail__desc d-flex flex-column ml-2 mr-5">
-                            <span class="game-detail__desc-name">
-                                Game name
-                            </span>
-
-                            <span class="game-detail__desc-label mt-3">
-                                Add This Game To Your Site:
-                            </span>
-                            <textarea class="game-detail__desc-textarea">
-                            </textarea>
-
-                            <span class="game-detail__desc-label mt-3">
-                                Link To The Game:
-                            </span>
-                            <textarea class="game-detail__desc-textarea">
-                            </textarea>
-
-                        </div>
-                        <div class="game-detail__ads d-none d-lg-flex">advertising</div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- RECOMMEND GAME LIST -->
-            <div class="row justify-content-center mt-2 d-none d-md-flex col-md-10 col-lg-8">
-                <div class="recommend-list__container col-12">
-                    <div class="recommend-list__title">
-                        Similar Games
-                    </div>
-
-                    <!-- GAME LIST -->
-                    <div class="mt-3 game-list">
-                        <div class="game-item-wrapper">
-                            <div class="game-item mb-3">
-                                <a href="https://google.com" target="_blank" class="game-item__link">
-                                    <img src="./assets_original/512x384.jpg" alt="Spiders" class="game-item__img">
-                                </a>
-                                <div class="game-item__desc">
-                                    <p class="game-item__name">Spiders</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ############################### -->
-                </div>
-
-            </div>
-
-            <div class="back-top-btn" id="BackTop">
-            </div>
+        <div class="back-top-btn" id="BackTop">
+        </div>
 
     </main>
 

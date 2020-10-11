@@ -75,6 +75,26 @@ function getGameList() {
         imageUrl: "./assets_original/512x384(184).jpg",
         name: "Game6",
       },
+      {
+        url: "google.com",
+        imageUrl: "./assets_original/512x384(184).jpg",
+        name: "Game6",
+      },
+      {
+        url: "google.com",
+        imageUrl: "./assets_original/512x384(184).jpg",
+        name: "Game6",
+      },
+      {
+        url: "google.com",
+        imageUrl: "./assets_original/512x384(184).jpg",
+        name: "Game6",
+      },
+      {
+        url: "google.com",
+        imageUrl: "./assets_original/512x384(184).jpg",
+        name: "Game6",
+      },
     ],
   };
 }
