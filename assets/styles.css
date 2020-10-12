@@ -102,6 +102,10 @@
   background-position: -244px 0;
 }
 
+.container-wrapper {
+  flex: 1;
+}
+
 .main-container {
   background-color: #0073dd;
   height: 100%;
@@ -255,6 +259,7 @@
 
 .game-detail__desc-textarea {
   width: 100%;
+  font-size: 12px;
 }
 
 .game-detail__desc-text {
@@ -302,8 +307,6 @@
 .game-list-vertical .game-item {
   height: 100px;
 }
-
-
 
 .tooltip-menu {
   position: absolute;
