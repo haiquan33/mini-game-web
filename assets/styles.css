@@ -11,8 +11,8 @@
 }
 
 .navbar-collapse {
-  flex-basis: auto;
-  flex-grow: unset;
+  /* flex-basis: auto;
+  flex-grow: unset; */
 }
 
 @media (min-width: 768px) {
