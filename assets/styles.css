@@ -352,6 +352,8 @@
   line-height: 30px;
 }
 
-.nav-item:hover > .tooltip-menu {
-  display: block;
+@media (min-width: 992px) {
+  .nav-item:hover > .tooltip-menu {
+    display: block;
+  }
 }
