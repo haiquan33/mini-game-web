@@ -104,6 +104,11 @@
 
 .container-wrapper {
   flex: 1;
+  height: fit-content;
+}
+
+.collapse.show {
+  display: inline-block;
 }
 
 .main-container {
@@ -202,7 +207,7 @@
   height: 568px;
   text-align: center;
   background: #222 url(./loader.gif) center 45% no-repeat;
-  position: relative;
+
   z-index: 1200 !important;
   overflow: hidden;
   min-height: 550px;
