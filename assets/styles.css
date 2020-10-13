@@ -11,8 +11,15 @@
 }
 
 .navbar-collapse {
-  /* flex-basis: auto;
-  flex-grow: unset; */
+  flex-basis: auto;
+  flex-grow: unset;
+}
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 1;
+  }
 }
 
 @media (min-width: 768px) {
