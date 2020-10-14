@@ -214,12 +214,31 @@
   height: 568px;
   text-align: center;
   background: #222 url(./loader.gif) center 45% no-repeat;
-
+  position: relative;
   z-index: 1200 !important;
   overflow: hidden;
   min-height: 550px;
   margin-bottom: 6px;
   min-width: 610px;
+}
+
+.game-iframe {
+  width: 100%;
+  height: 568px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.game-iframe.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 768px) {
@@ -229,6 +248,11 @@
     min-width: 0px;
     min-height: 0px;
   }
+
+  .game-iframe {
+    width: 100%;
+    height: 40vw;
+  }
 }
 
 @media (max-width: 375px) {
@@ -237,6 +261,11 @@
     height: 60vw;
     min-width: 0px;
     min-height: 0px;
+  }
+
+  .game-iframe {
+    width: 100%;
+    height: 60vw;
   }
 }
 
@@ -356,4 +385,24 @@
   .nav-item:hover > .tooltip-menu {
     display: block;
   }
+}
+
+.fullscreen-btn {
+  background: url(./sprite.png?v=3) no-repeat;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-position: -307px 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.minimize-btn {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  z-index: 10000;
+  font-family: Oswald, sans-serif;
 }

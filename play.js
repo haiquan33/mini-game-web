@@ -85,6 +85,20 @@ $(document).ready(function () {
     $("html, body").animate({ scrollTop: 0 }, "300");
   });
 
+  $("#fullscreenBtn").click(function (e) {
+    e.preventDefault();
+    $(".game-iframe").addClass('fullscreen');
+    $("#fullscreenBtn").addClass('d-none');
+    $("#minimizeBtn").removeClass('d-none');
+  });
+
+  $("#minimizeBtn").click(function (e) {
+    e.preventDefault();
+    $(".game-iframe").removeClass('fullscreen');
+    $("#fullscreenBtn").removeClass('d-none');
+    $("#minimizeBtn").addClass('d-none');
+  });
+
   setGameDesc(gameDesc);
 
   setVerticalGameList("list_left", data_1);
