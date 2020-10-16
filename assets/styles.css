@@ -388,21 +388,24 @@
 }
 
 .fullscreen-btn {
-  background: url(./sprite.png?v=3) no-repeat;
+  background: url(./expand.png) no-repeat;
   display: inline-block;
-  width: 22px;
-  height: 22px;
-  background-position: -307px 0;
+  background-size: contain;   
+  width:30px;
+  height: 30px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 2px;
+  right: 2px;
 }
 
 .minimize-btn {
   position: fixed;
-  top: 0;
-  right: 0;
-  font-size: 30px;
+  background: url(./collapse.png) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  top: 2px;
+  right: 2px;
   z-index: 10000;
-  font-family: Oswald, sans-serif;
 }
